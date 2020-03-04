@@ -1,0 +1,165 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<bodyonload="createElements()">
+
+
+<form action="#">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname"><br><br>
+
+<label for="fname">Email:</label><br>
+  <input type="text" id="email" name="email"><br><br>
+  <label for="lname">Contact Number:</label><br>
+  <input type="text" id="cno" name="cno"><br><br>
+<label for="add">Address:</label><br>
+ <textarea name="add" rows="2" cols="20"></textarea>
+  <br><br>
+  
+
+<label for="fname">Username:</label><br>
+  <input type="text" id="unm" name="unm"><br>
+  <label for="lname">Password:</label><br><br>	
+  <input type="text" id="pwd" name="pwd"><br><br>
+
+Gender<br> <input type="radio" id="male" name="gender" value="male">
+  <label for="male">Male</label><br>
+  <input type="radio" id="female" name="gender" value="female">
+  <label for="female">Female</label><br><br>
+
+
+Qualification : <br><select id="qualification">
+  <option value="1">graduation</option>
+  <option value="2">post graduation</option>
+  <option value="3">10th pass</option>
+  <option value="4">12th pass</option>
+</select><br><br>
+
+Experience: <br><select id="exp">
+  <option value="1">No</option>
+  <option value="2">2 yrs</option>
+  <option value="3">4 yrs</option>
+  <option value="4">more</option>
+</select><br><br>
+
+Coding Languages :<br><div class="checkbox">
+      <label><input type="checkbox" value="">C/C++</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">Java</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="" disabled>PHP</label>
+    </div>
+<div class="checkbox">
+      <label><input type="checkbox" value="" disabled>Python</label>
+    </div><br><br>
+<input type="submit" name="submit" value="submit">
+
+</form> 
+
+<script>
+        qualifications = ['graduation', 'post graduation', '10th pass', '12th pass'];
+        experiences = ['no',2,4,'more'];
+        codingLanguages = [
+            {
+                LanguageName:"C/C++",
+                isEnabled: true
+            },
+            {
+                LanguageName:"Java",
+                isEnabled: false
+            },
+            {
+                LanguageName:"C#",
+                isEnabled: true
+            },
+            {
+                LanguageName:"PHP",
+                isEnabled: false
+            },
+            {
+                LanguageName:"Python",
+                isEnabled: false
+            }
+        ];
+        document.getElementById("btn").addEventListener("click",
+        function(e) {
+            var employee={};
+            e.preventDefault();
+            employee.fname = document.getElementById("fname").value;
+            employee.lname = document.getElementById("lname").value;
+            employee.email = document.getElementById("email").value;
+            employee.contact = document.getElementById("cno").value;
+            employee.address = document.getElementById("add").value;
+            employee.username = document.getElementById("unm").value;
+            employee.pass = document.getElementById("pwd").value;
+            employee.gender = document.getElementById("gender").value;
+            employee.qualification = document.getElementById("qualification").value;
+            employee.experience = document.getElementById("exp").value;
+			
+            employee.codingLanguages = document.querySelectorAll("#lang:checked");
+
+            // Printing
+           console.log(employee.fname);
+           console.log(employee.lname);
+           console.log(employee.email);
+           console.log(employee.cno);
+           console.log(employee.add);
+           console.log(employee.unm);
+           console.log(employee.pwd);
+		   console.log(employee.gender);
+		   console.log(employee.qualification);
+		   console.log(employee.exp);
+			
+
+		
+
+            for(i=0;i<employee.codingLanguages.length;i++)
+                console.log(employee.codingLanguages[i].value);
+        })
+
+        function createElements(){
+            var qualification = document.getElementById("qualification");
+            for(let i = 0; i<qualifications.length;i++){
+                let el = document.createElement("option");
+                el.value = qualifications[i];
+                el.innerText = qualifications[i];
+                qualification.appendChild(el);
+            }
+
+            var experience = document.getElementById("exp");
+            for(let i = 0; i<experiences.length;i++){
+                let el = document.createElement("option");
+                el.value = experiences[i];
+                el.innerText = experiences[i];
+                experience.appendChild(el);
+            }
+
+            var checkDiv = document.getElementById("checkbox");
+            for(let i = 0; i<codingLanguages.length;i++){
+                let el = document.createElement("input");
+                el.type = "checkbox";
+                el.id="lang";
+                el.value = codingLanguages[i].LanguageName;
+                el.checked = codingLanguages[i].isEnabled;
+
+                let span = document.createElement("span");
+                span.appendChild(document.createTextNode(codingLanguages[i].LanguageName));
+                checkDiv.appendChild(el);
+                checkDiv.appendChild(span);
+				checkDiv.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+
+
+</body>
+</html>
